@@ -54,7 +54,7 @@ jobs:
             at: dist
         - run: sudo apt-get update && sudo apt-get install -y lftp
         - run: ls -lisah
-        - run: lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev dist/* / --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"
+        - run: lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev dist --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"
 
 workflows:
   # Below is the definition of your workflow.
