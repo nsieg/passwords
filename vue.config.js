@@ -4,7 +4,6 @@ const webpack = require('webpack');
 module.exports = {
     configureWebpack: {
         plugins: [
-            new BundleAnalyzerPlugin(),
             new webpack.ProvidePlugin({
                 'introJs': ['intro.js']
             })

@@ -29,9 +29,19 @@ npx vue-pwa-asset-generator -a src/assets/icon-lock.png
 ```
 
 ### Webpack Bundle Analyzer
+package.json:
 ```
 "devDependencies": {
     ...
     "webpack-bundle-analyzer": "^3.9.0"
+}
+```
+
+vue.config.js
+```
+configureWebpack: {
+    plugins: [
+        new BundleAnalyzerPlugin()
+    ]
 }
 ```
