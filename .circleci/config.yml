@@ -38,11 +38,20 @@ jobs:
       - run:
           name: Build
           command: npm run build
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - dist
 
   deploy:
       docker:
         - image: cimg/base:2021.05
       steps:
+        - attach_workspace:
+            at: dist
         - run: sudo apt-get update && sudo apt-get install -y lftp
         - run: ls -lisah
         - run: lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev dist/ --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"
