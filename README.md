@@ -27,3 +27,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
 npx vue-pwa-asset-generator -a src/assets/icon-lock.png 
 ```
+
+### Webpack Bundle Analyzer
+```
+"devDependencies": {
+    ...
+    "webpack-bundle-analyzer": "^3.9.0"
+}
+```
