@@ -43,8 +43,6 @@ jobs:
       docker:
         - image: cimg/base:2021.05
       steps:
-        - checkout
-        # Whatever you want to do
         - run: sudo apt-get update && sudo apt-get install -y lftp
         - run: ls -lisah
         - run: lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev dist/ --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"
