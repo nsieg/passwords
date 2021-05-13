@@ -29,9 +29,6 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn 
       - run:
-          name: Run tests
-          command: npm install --dev jest-junit
-      - run:
           name: Run tests with JUnit as reporter
           command: jest --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
