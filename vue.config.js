@@ -17,11 +17,7 @@ module.exports = {
         appleMobileWebAppCapable: "yes",
         appleMobileWebAppStatusBarStyle: "default",
         manifestOptions: {
-            name: pwa.name,
-            short_name: pwa.name,
             start_url: '/?utm_source=homescreen',
-            display: 'standalone',
-            theme_color: pwa.themeColor
         }
     }
 };
