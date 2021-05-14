@@ -1,9 +1,10 @@
-# hello-world
+# Passha
+[![CircleCI](https://circleci.com/gh/nsieg/passwords.svg?style=shield)](https://github.com/nsieg/passwords)
 
-## Project setup
-```
-npm install
-```
+Create unique passwords by hashing a service alias and your single master password.
+
+[🔗 Live Demo](https://passwords.nilssiegfried.de)
+
 
 ### Compiles and hot-reloads for development
 ```
@@ -15,13 +16,10 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
+## Project setup
 ```
-npm run lint
+npm install
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Generating icons
 ```
@@ -31,6 +29,7 @@ npx vue-pwa-asset-generator -a src/assets/icon-lock.png
 ### Webpack Bundle Analyzer
 package.json:
 ```
+...
 "devDependencies": {
     ...
     "webpack-bundle-analyzer": "^3.9.0"
@@ -40,7 +39,9 @@ package.json:
 vue.config.js
 ```
 configureWebpack: {
+    ...
     plugins: [
+        ...
         new BundleAnalyzerPlugin()
     ]
 }
