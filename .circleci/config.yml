@@ -56,13 +56,9 @@ jobs:
         - image: cimg/base:2021.05
       steps:
         - attach_workspace:
-            at: dist
+            at: /home/circleci/project
         - run: sudo apt-get update && sudo apt-get install -y lftp
-        - run: ls -lisah
-        - run: cd dist
-        - run: lftp -v
-        - run: ls -lisah
-        - run: lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev . / --ignore-time --parallel=10"
+        - run: cd dist && lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev . / --ignore-time --parallel=10"
 
 
 workflows:
