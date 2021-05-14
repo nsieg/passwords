@@ -59,6 +59,7 @@ jobs:
             at: dist
         - run: sudo apt-get update && sudo apt-get install -y lftp
         - run: ls -lisah
+        - run: cd dist
         - run: lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev . / --ignore-time --parallel=10"
 
 
