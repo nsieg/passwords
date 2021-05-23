@@ -6,14 +6,12 @@
 
 <script>
 import "intro.js/minified/introjs.min.css";
-//import "intro.js/themes/introjs-modern.css";
 import introJs from 'intro.js';
 
 export default {
   name: 'Tour',
   methods: {
     startTour () {
-      console.log(introJs)
         introJs().setOptions({ 
           showBullets: false,
           hidePrev: true,
