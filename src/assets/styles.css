@@ -1,0 +1,12 @@
+.introjs-tooltip-header {
+    height: 0px;
+}
+.introjs-skipbutton {
+    visibility: hidden;
+}
+.introjs-button {
+    padding: .25rem .5rem
+}
+.introjs-tooltiptext {
+    padding: 10px
+}
