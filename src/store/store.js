@@ -4,6 +4,7 @@ import { copyById } from '../lib/copier.js'
 import { iconString } from '../lib/iconer.js'
 import { CHANGE_ALIAS, CHANGE_MASTER, COPY } from './mutation-types'
 import { SHA1_B64, SHA1_B64_MIN_TWO } from './algo-types'
+import { placeholders } from './placeholders'
 
 export default createStore({
     state: {
@@ -23,19 +24,22 @@ export default createStore({
         hash: (state) => (algo) => {
             switch (algo) {
                 case SHA1_B64:
-                    if (state.master === "" && state.alias === "") {
-                        return "<10 Chars SHA1 B64>"
+                    if (state.master === "" || state.alias === "") {
+                        return ""
                     }
                     return hashSimple(state.master, state.alias, 10)
                 case SHA1_B64_MIN_TWO:
-                    if (state.master === "" && state.alias === "") {
-                        return "<10 Chars SHA1 B64 ll/UU/11/++>"
+                    if (state.master === "" || state.alias === "") {
+                        return ""
                     }
                     return hash(state.master, state.alias, 10)
             }
         },
         algos (state) {
             return state.algos
+        },
+        placeholder: () => (algo) => {
+            return placeholders[algo]
         }
     },
     mutations: {

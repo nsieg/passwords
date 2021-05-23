@@ -1,13 +1,16 @@
 <template>
   <div class="container container-padding">
     <form autocomplete="off">
+      <div class="has-text-right">
+        <Tour />
+      </div>       
 
       <div class="field">
         <label class="label">Master</label>  
         <div class="control">
-          <div class="field has-addons">   
+          <div class="field has-addons tour-step-2">   
             <div class="control is-expanded">                  
-              <input @input="updateMaster" :value="master" type="password" class="input" placeholder="master" id="master" />           
+              <input @input="updateMaster" :value="master" type="password" class="input tour-step-1" placeholder="master" id="master" />           
             </div>
             <div class="control">
               <span class="button is-static icon-min-width" v-html="masterIconString" />
@@ -19,15 +22,15 @@
       <div class="field">
         <label class="label">Service Alias</label>
         <div class="control">
-          <InputNoAuto @input="updateAlias" :value="alias" type="text" class="input" placeholder="alias" id="alias" />
+          <InputNoAuto @input="updateAlias" :value="alias" type="text" class="input tour-step-3" placeholder="alias" id="alias" />
        </div>
       </div>
 
       <hr />
 
-      <div v-for="algo in algos" :key="algo" class="field has-addons" data-intro='Hello step one!'>
+      <div v-for="(algo, idx) in algos" :key="algo" :class="'field has-addons tour-step-' + (idx+4)">
         <div class="control is-expanded">
-          <input :algo="algo" type="text" :value="hash(algo)" class="input" :id="'result-' + algo" readonly />
+          <input :algo="algo" type="text" :value="hash(algo)" class="input" :id="'result-' + algo" :placeholder="placeholder(algo)" readonly />
         </div>
         <div class="control">
           <ButtonCopy :algo="algo" class="button is-primary" />
@@ -41,9 +44,10 @@
 <script>
 import InputNoAuto from './InputNoAuto'
 import ButtonCopy from './ButtonCopy'
+import Tour from './Tour'
 import { mapGetters, mapState } from 'vuex'
 import { CHANGE_ALIAS, CHANGE_MASTER } from '../store/mutation-types.js'
-import "intro.js/minified/introjs.min.css";
+
 
 export default {
   name: 'Passwords',
@@ -57,15 +61,12 @@ export default {
   },
   computed: {
     ...mapState([ 'master', 'alias' ]),
-    ...mapGetters([ 'algos', 'hash', 'masterIconString' ]),
+    ...mapGetters([ 'algos', 'hash', 'masterIconString', 'placeholder' ]),
   },
   components: {
     InputNoAuto,
-    ButtonCopy
-  },
-  mounted() {
-    const introJS = require("intro.js");
-    introJS.introJs().start();
+    ButtonCopy,
+    Tour
   }
 }
 </script>
