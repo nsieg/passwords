@@ -5,15 +5,12 @@
 </template>
 
 <script>
-import "intro.js/minified/introjs.min.css";
-//import "intro.js/themes/introjs-modern.css";
 import introJs from 'intro.js';
 
 export default {
   name: 'Tour',
   methods: {
     startTour () {
-      console.log(introJs)
         introJs().setOptions({ 
           showBullets: false,
           hidePrev: true,
@@ -45,18 +42,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.introjs-tooltip-header {
-  height: 0px;
-}
-.introjs-skipbutton {
-  visibility: hidden;
-}
-.introjs-button {
-  padding: .25rem .5rem
-}
-.introjs-tooltiptext {
-  padding: 10px
-}
-</style>
