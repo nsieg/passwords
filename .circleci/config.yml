@@ -51,6 +51,12 @@ jobs:
     steps:
       - lighthouse-check/audit:
           urls: 'https://passwords-test.nilssiegfried.de'
+      - lighthouse-check/validate-status:
+              minAccessibilityScore: '70'
+              minBestPracticesScore: '90'
+              minPerformanceScore: '90'
+              minProgressiveWebAppScore: '90'
+              minSeoScore: '90'
   deploy:
       docker:
         - image: cimg/base:2021.05
@@ -58,7 +64,16 @@ jobs:
         - attach_workspace:
             at: /home/circleci/project
         - run: sudo apt-get update && sudo apt-get install -y lftp
-        - run: cd dist && lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rev . / --ignore-time --parallel=10"
+        - run: cd dist && lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME_TEST,$FTP_PASSWORD_TEST $FTP_HOST_TEST; mirror -Rev . / --ignore-time --parallel=10"
+  deploy-prod:
+        docker:
+          - image: cimg/base:2021.05
+        steps:
+          - attach_workspace:
+              at: /home/circleci/project
+          - run: sudo apt-get update && sudo apt-get install -y lftp
+          - run: cd dist && lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME_PROD,$FTP_PASSWORD_PROD $FTP_HOST_PROD; mirror -Rev . / --ignore-time --parallel=10"
+
 
 
 workflows:
@@ -75,3 +90,9 @@ workflows:
       - lighthouse-check:
           requires:
             - deploy
+      - deploy-prod:
+          requires:
+            - lighthouse-check
+          filters:
+            branches:
+              only: master
